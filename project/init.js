@@ -6,6 +6,7 @@ function done(timer) {
   setTimeout(function(){
     clearScreen();
     createTable();
+    createButtons();
   }, 1000);
 }
 

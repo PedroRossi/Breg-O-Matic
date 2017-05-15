@@ -33,13 +33,16 @@ function createTable() {
       row.appendChild(td);
     }
   }
+}
+
+function createButtons() {
   var playBtn = document.createElement('button');
   document.getElementsByTagName('main')[0].appendChild(playBtn);
   playBtn.innerHTML="Play";
-  playBtn.onclick = "playY()";
+  playBtn.onclick = playY;
 
   var stopBtn = document.createElement('button');
   document.getElementsByTagName('main')[0].appendChild(stopBtn);
   stopBtn.innerHTML="Stop";
-  stopBtn.onclick = "stopY()";
+  stopBtn.onclick = stopY;
 }
