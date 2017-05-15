@@ -38,4 +38,8 @@ var stopY = function(){
       this.instruments[key][playingNow[key]].currentTime = 0;
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0da295573b877e238f13f996267a0a27f389c612

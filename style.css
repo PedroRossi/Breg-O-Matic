@@ -1,0 +1,25 @@
+@font-face {
+    font-family: Title;
+    src: url('fonts/naughty_scratch_free.ttf');
+}
+
+h1 {
+    font-size: 300%;
+    font-family: Title;
+    text-align: center;
+    margin-top: 200px;
+}
+
+#images {
+    white-space: nowrap;
+    opacity: 1;
+    align-content: center;
+    margin-top: 50px;
+}
+
+#but {
+    font-size: 100%;
+    font-family: Title;
+    text-align: center;
+    margin-top: 75px;
+}
