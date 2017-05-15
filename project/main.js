@@ -1,16 +1,15 @@
-trackLength = 2;
+trackLength = 0;
 tracks = {};
 var addTrack = function(instrument,value,position){
   if(tracks[instrument] == undefined)tracks[instrument] = {};
   tracks[instrument][position] = value;
-  trackLength = position + 2;
+  trackLength = position + 1;
 }
 var playingNow = {};
 
 var loopey;
-var CallB = function(instruments){
+var playY = function(){
   i = 0;
-  this.instruments=instruments;
   loopey = setInterval(function(){
     for(key in tracks){
       if(tracks[key][i]!=undefined){
@@ -25,6 +24,10 @@ var CallB = function(instruments){
     i = i + 1;
     if(i == trackLength)clearInterval(loopey);
   },1000);
+}
+
+var callB = function(instruments){
+  this.instruments=instruments;
 }
 
 var stopY = function(){
