@@ -29,17 +29,18 @@ function load(callback) {
     var ret = { };
     var pending = folders.length;
     for(var i in folders) {
-      var folder = folders[i]
-      loadJSON('/instruments/' + folder + '/index.json', function(err, files) {
-        if(err) {
-          console.log(err);
-          return;
-        }
-        ret[folder] = loadAudios(folder, files);
-        --pending;
-        if(pending == 0 && callback)
-          callback(ret);
-      })
+      (function(i, folder) {
+        loadJSON('/instruments/' + folder + '/index.json', function(err, files) {
+          if(err) {
+            console.log(err);
+            return;
+          }
+          ret[folder] = loadAudios(folder, files);
+          --pending;
+          if(pending == 0 && callback)
+            callback(ret);
+        })
+      })(i, folders[i])
     }
   });
 }

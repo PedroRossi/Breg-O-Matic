@@ -1,6 +1,7 @@
 trackLength = 0;
 tracks = {};
 var addTrack = function(instrument,value,position){
+  console.log(instrument, value, position);
   if(tracks[instrument] == undefined)tracks[instrument] = {};
   tracks[instrument][position] = value;
   trackLength = position + 1;

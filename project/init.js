@@ -1,6 +1,14 @@
 var time;
 var cur;
 
+function done(timer) {
+  clearInterval(timer);
+  setTimeout(function(){
+    clearScreen();
+    createTable();
+  }, 1000);
+}
+
 function update() {
     var element = document.getElementById(cur.toString());
     element.src = "image/galeroso.png";
@@ -11,9 +19,9 @@ function go() {
     var timer = setInterval(
         function() {
             if (cur == 10) {
-                clearInterval(timer);
+                done(timer);
             } else update();
-        }, 500
+        }, 1
     );
 }
 
