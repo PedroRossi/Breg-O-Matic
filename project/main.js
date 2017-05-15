@@ -13,7 +13,7 @@ var playY = function(){
   loopey = setInterval(function(){
     for(key in tracks){
       if(tracks[key][i]!=undefined){
-        if(playingNow[key]){
+        if(playingNow[key] || playingNow[key] == 0){
           instruments[key][playingNow[key]].pause();
           instruments[key][playingNow[key]].currentTime = 0;
         }
