@@ -1,13 +1,21 @@
 var time;
 var cur;
 
+function getVaicarai() {
+    new Audio("troinha.mp3").play();
+}
+
 function done(timer) {
   clearInterval(timer);
-  setTimeout(function(){
-    clearScreen();
-    createTable();
-    createButtons();
-  }, 1000);
+  document.getElementById("but").disabled = false;
+  getVaicarai();
+  document.getElementById("but").onclick = function() {
+    setTimeout(function(){
+        clearScreen();
+        createTable();
+        createButtons();
+      }, 1000);
+  };
 }
 
 function update() {
@@ -22,12 +30,13 @@ function go() {
             if (cur == 10) {
                 done(timer);
             } else update();
-        }, 1
+        }, 750
     );
 }
 
 function main() {
     cur = 0;
+    document.getElementById("but").disabled = true;
     go();
 }
 
