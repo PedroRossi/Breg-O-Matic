@@ -24,7 +24,7 @@ var playY = function(){
     }
     i = i + 1;
     if(i == trackLength)clearInterval(loopey);
-  },1000);
+  }, 1500);
 }
 
 var callB = function(instruments){
