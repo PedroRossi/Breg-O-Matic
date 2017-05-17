@@ -34,9 +34,9 @@ var callB = function(instruments){
 var stopY = function(){
   clearInterval(loopey);
   for(key in tracks){
-    if(playingNow[key]!=undefined){
-      this.instruments[key][playingNow[key]].pause();
-      this.instruments[key][playingNow[key]].currentTime = 0;
+    for(x in instruments[key]){
+      instruments[key][x].pause();
+      instruments[key][x].currentTime = 0;
     }
   }
 }
