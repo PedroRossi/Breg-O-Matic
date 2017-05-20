@@ -9,7 +9,7 @@ var addTrack = function(instrument,value,position){
 var playingNow = {};
 
 var loopey;
-var playY = function(){
+function playGroup(){
   i = 0;
   loopey = setInterval(function(){
     for(key in tracks){
@@ -31,7 +31,7 @@ var callB = function(instruments){
   this.instruments=instruments;
 }
 
-var stopY = function(){
+var stopGroup = function(){
   clearInterval(loopey);
   for(key in tracks){
     for(x in instruments[key]){

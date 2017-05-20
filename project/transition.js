@@ -10,11 +10,11 @@ function createSelect(tracksLength, instrument, time) {
     else addTrack(instrument, value, time)
   }
   for(var j = -1; j < tracksLength; ++j) {
-      var option = document.createElement('option');
-      option.value = j;
-      if(j >= 0)
-        option.appendChild(document.createTextNode(j));
-      select.appendChild(option);
+    var option = document.createElement('option');
+    option.value = j;
+    if(j >= 0)
+      option.appendChild(document.createTextNode(j));
+    select.appendChild(option);
   }
   return select
 }
@@ -39,10 +39,10 @@ function createButtons() {
   var playBtn = document.createElement('button');
   document.getElementsByTagName('main')[0].appendChild(playBtn);
   playBtn.innerHTML="Play";
-  playBtn.onclick = playY;
+  playBtn.onclick = playGroup;
 
   var stopBtn = document.createElement('button');
   document.getElementsByTagName('main')[0].appendChild(stopBtn);
   stopBtn.innerHTML="Stop";
-  stopBtn.onclick = stopY;
+  stopBtn.onclick = stopGroup;
 }
