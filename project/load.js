@@ -1,7 +1,10 @@
+var relativePath = '';
+
+if (window.location.pathname.indexOf('Breg-O-Matic') !== -1)
+  relativePath = '/Breg-O-Matic';
+
 function loadJSON(path, callback) {
   var httpRequest = new XMLHttpRequest();
-  if (window.location.href.indexOf('Breg-O-Matic') !== -1)
-    path = '/Breg-O-Matic' + path;
   httpRequest.onreadystatechange = function() {
     if (httpRequest.readyState === 4) {
       if (httpRequest.status === 200) {
@@ -12,14 +15,14 @@ function loadJSON(path, callback) {
       }
     }
   };
-  httpRequest.open('GET', path);
+  httpRequest.open('GET', relativePath+path);
   httpRequest.send();
 }
 
 function loadAudios(instrument, files) {
   var ret = [];
   for (var i in files)
-    ret.push(new Audio('/instruments/' + instrument + '/' + files[i]));
+    ret.push(new Audio(relativePath + '/instruments/' + instrument + '/' + files[i]));
   return ret;
 }
 
