@@ -1,1 +1,10 @@
-["Drums01.wav", "Drums02.wav"]
+[
+  {
+    "file": "Drums01.wav",
+    "tempo": 4
+  },
+  {
+    "file": "Drums02.wav",
+    "tempo": 4
+  }
+]

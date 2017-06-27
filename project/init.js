@@ -1,14 +1,14 @@
 var time;
 var cur;
 
-function getVaicarai() {
+function getVaiCarai() {
   new Audio("troinha.mp3").play();
 }
 
 function done(timer) {
   clearInterval(timer);
   document.getElementById("but").disabled = false;
-  getVaicarai();
+  // getVaiCarai();
   document.getElementById("but").onclick = function() {
     setTimeout(function(){
       clearScreen();
@@ -20,17 +20,18 @@ function done(timer) {
 
 function update() {
   var element = document.getElementById(cur.toString());
-  element.src = "image/galeroso.png";
-  cur += 1
+  element.src = "assets/images/galeroso.png";
+  cur++;
 }
 
 function go() {
   var timer = setInterval(
     function() {
-      if (cur == 10) {
-          done(timer);
-      } else update();
-    }, 750
+      if (cur == 10)
+        done(timer);
+      else
+        update();
+    }, 0 //750
   );
 }
 

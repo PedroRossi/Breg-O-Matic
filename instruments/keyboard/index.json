@@ -1,1 +1,14 @@
-["Solo01.wav", "Solo01-02.wav", "Solo02.wav"]
+[
+  {
+    "file": "Solo01.wav",
+    "tempo": 2
+  },
+  {
+    "file": "Solo01-02.wav",
+    "tempo": 1
+  },
+  {
+    "file": "Solo02.wav",
+    "tempo": 4
+  }
+]

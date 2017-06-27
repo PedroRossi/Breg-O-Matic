@@ -1,5 +1,14 @@
 [
-  "bass",
-  "keyboard",
-  "drums"
+  {
+    "folder": "bass",
+    "display": "Baixo"
+  },
+  {
+    "folder": "keyboard",
+    "display": "Teclado"
+  },
+  {
+    "folder": "drums",
+    "display": "Bateria"
+  }
 ]

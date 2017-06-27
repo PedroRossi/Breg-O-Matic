@@ -1,1 +1,6 @@
-["Bass01.wav"]
+[
+  {
+    "file": "Bass01.wav",
+    "tempo": 4
+  }
+]

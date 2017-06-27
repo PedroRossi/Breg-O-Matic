@@ -19,34 +19,37 @@ function loadJSON(path, callback) {
   httpRequest.send();
 }
 
-function loadAudios(instrument, files) {
+function loadSamples(instrument, samples) {
   var ret = [];
-  for (var i in files)
-    ret.push(new Audio(relativePath + '/instruments/' + instrument + '/' + files[i]));
+  for (var i in samples) {
+    var audio = new Audio(relativePath + '/instruments/' + instrument.folder + '/' + samples[i].file);
+    audio.tempo = samples[i].tempo;
+    ret.push(audio);
+  }
   return ret;
 }
 
 function load(callback) {
-  loadJSON('/instruments/index.json', function(err, folders) {
-    if(err) {
+  loadJSON('/instruments/index.json', function(err, instruments) {
+    if (err) {
       console.log(err);
       return;
     }
-    var ret = { };
-    var pending = folders.length;
-    for (var i in folders) {
-      (function(i, folder) {
-        loadJSON('/instruments/' + folder + '/index.json', function(err, files) {
-          if(err) {
+    var ret = {};
+    var pending = instruments.length;
+    for (var i in instruments) {
+      (function(i, instrument) {
+        loadJSON('/instruments/' + instrument.folder + '/index.json', function(err, samples) {
+          if (err) {
             console.log(err);
             return;
           }
-          ret[folder] = loadAudios(folder, files);
+          ret[instrument.folder] = loadSamples(instrument, samples);
           --pending;
           if(pending == 0 && callback)
             callback(ret);
         })
-      })(i, folders[i])
+      })(i, instruments[i])
     }
   });
 }
