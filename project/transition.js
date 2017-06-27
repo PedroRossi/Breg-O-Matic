@@ -2,14 +2,15 @@ function clearScreen() {
   document.getElementsByTagName('main')[0].innerHTML = '';
 }
 
-function createSelect(tracksLength, instrument, time) {
+function createSelect(instrument, time) {
+  console.log(instrument);
   var select = document.createElement('select');
   select.onchange = function(e) {
     var value = parseInt(e.target.value);
-    if(value == -1) addTrack(instrument, null, time)
-    else addTrack(instrument, value, time)
+    if(value == -1) player.removeTrack(time*audioContext.sampleRate, instrument);
+    else player.addTrack(time*audioContext.sampleRate, instrument, instruments[instrument].bufferList[value]);
   }
-  for(var j = -1; j < tracksLength; ++j) {
+  for(var j = -1; j < instruments[instrument].bufferList.length; ++j) {
     var option = document.createElement('option');
     option.value = j;
     if(j >= 0)
@@ -22,14 +23,14 @@ function createSelect(tracksLength, instrument, time) {
 function createTable() {
   var table = document.createElement('table');
   document.getElementsByTagName('main')[0].appendChild(table);
-  for(var i in this.instruments) {
+  for(var i in instruments) {
     var row = document.createElement('tr');
     table.appendChild(row);
     row.appendChild(document.createElement('tr').appendChild(document.createTextNode(i)));
     var select = document.createElement('select');
     for(var j = 0; j <= 30; ++j) {
       var td = document.createElement('td');
-      td.appendChild(createSelect(this.instruments[i].length, i, j));
+      td.appendChild(createSelect(i, j));
       row.appendChild(td);
     }
   }
@@ -39,10 +40,10 @@ function createButtons() {
   var playBtn = document.createElement('button');
   document.getElementsByTagName('main')[0].appendChild(playBtn);
   playBtn.innerHTML="Play";
-  playBtn.onclick = playGroup;
+  playBtn.onclick = player.play.bind(player);
 
   var stopBtn = document.createElement('button');
   document.getElementsByTagName('main')[0].appendChild(stopBtn);
   stopBtn.innerHTML="Stop";
-  stopBtn.onclick = stopGroup;
+  stopBtn.onclick = player.stop.bind(player);
 }

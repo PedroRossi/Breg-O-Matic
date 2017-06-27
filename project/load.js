@@ -3,6 +3,8 @@ var relativePath = '';
 if (window.location.pathname.indexOf('Breg-O-Matic') !== -1)
   relativePath = '/Breg-O-Matic';
 
+var audioContext = new (window.webkitAudioContext || window.AudioContext)();
+
 function loadJSON(path, callback) {
   var httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = function() {
@@ -11,42 +13,47 @@ function loadJSON(path, callback) {
         var data = JSON.parse(httpRequest.responseText);
         if (callback) callback(null, data);
       } else {
-        callback({msg: httpRequest.statusText});
+        if (callback) callback(new Error(httpRequest.statusText));
       }
     }
   };
-  httpRequest.open('GET', relativePath+path);
+  httpRequest.open('GET', relativePath+path, true);
   httpRequest.send();
 }
 
-function loadAudios(instrument, files) {
-  var ret = [];
-  for (var i in files)
-    ret.push(new Audio(relativePath + '/instruments/' + instrument + '/' + files[i]));
-  return ret;
+var instruments = {};
+
+function loadInstrument(instrument) {
+  loadJSON(relativePath + '/instruments/' + instrument + '/index.json', function(err, data) {
+    if(err) {
+      if(callback) callback(err);
+      else throw err;
+    } else {
+      for(i in data)
+        instruments[instrument].addURL(relativePath + '/instruments/' + instrument + '/' + data[i]);
+      instruments[instrument].load();
+    }
+  })
 }
 
-function load(callback) {
-  loadJSON('/instruments/index.json', function(err, folders) {
+function callbackUnify(count, callback) {
+  return function() {
+    count -= 1;
+    if(count == 0) callback();
+  }
+}
+
+function loadInstruments(callback) {
+  loadJSON(relativePath + '/instruments/index.json', function(err, data) {
     if(err) {
-      console.log(err);
-      return;
+      if(callback) callback(err);
+      else throw err;
+    } else {
+      var nCallback = callbackUnify(data.length, callback);
+      for(i in data) {
+        instruments[data[i]] = new BufferLoader(audioContext, [], nCallback);
+        loadInstrument(data[i]);
+      }
     }
-    var ret = { };
-    var pending = folders.length;
-    for (var i in folders) {
-      (function(i, folder) {
-        loadJSON('/instruments/' + folder + '/index.json', function(err, files) {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          ret[folder] = loadAudios(folder, files);
-          --pending;
-          if(pending == 0 && callback)
-            callback(ret);
-        })
-      })(i, folders[i])
-    }
-  });
+  })
 }
