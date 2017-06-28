@@ -7,7 +7,7 @@ function clearScreen() {
   document.getElementById('welcome').hidden = true;
 }
 
-function createSelect(tracksLength, instrument, time) {
+function createSelect(instrument, time) {
   var select = document.createElement('select');
   select.instrument = instrument;
   select.time = time;
@@ -21,10 +21,10 @@ function createSelect(tracksLength, instrument, time) {
       this.selectedIndex++;
       var value = parseInt(e.target.value);
       if (value == -1)
-        addTrack(instrument, null, time)
+        player.removeTrack(time, instrument)
       else
-        addTrack(instrument, value, time)
-      var audio = instruments[this.instrument][this.selectedIndex-1];
+        player.addTrack(time, instrument, instruments[instrument].bufferList[value])
+      var audio = instruments[instrument][value];
       var tempo = 0;
       if (audio)
         tempo = audio.tempo;
@@ -39,7 +39,7 @@ function createSelect(tracksLength, instrument, time) {
       }
     }
   }
-  for (var j = -1; j < tracksLength; ++j) {
+  for (var j = -1; j < instruments[instrument].bufferList.length; ++j) {
     var option = document.createElement('option');
     option.value = j;
     if (j >= 0) {

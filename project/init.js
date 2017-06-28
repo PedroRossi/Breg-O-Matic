@@ -1,5 +1,6 @@
 var time;
 var cur;
+var player;
 
 function getVaiCarai() {
   new Audio("troinha.mp3").play();
@@ -11,6 +12,7 @@ function done(timer) {
   // getVaiCarai();
   document.getElementById("but").onclick = function() {
     setTimeout(function(){
+      player = new Player(20.0*1.686);
       clearScreen();
       createTable();
       createButtons();
