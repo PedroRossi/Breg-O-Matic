@@ -7,8 +7,8 @@ function createSelect(instrument, time) {
   var select = document.createElement('select');
   select.onchange = function(e) {
     var value = parseInt(e.target.value);
-    if(value == -1) player.removeTrack(time*audioContext.sampleRate, instrument);
-    else player.addTrack(time*audioContext.sampleRate, instrument, instruments[instrument].bufferList[value]);
+    if(value == -1) player.removeTrack(time, instrument);
+    else player.addTrack(time, instrument, instruments[instrument].bufferList[value]);
   }
   for(var j = -1; j < instruments[instrument].bufferList.length; ++j) {
     var option = document.createElement('option');
@@ -28,9 +28,9 @@ function createTable() {
     table.appendChild(row);
     row.appendChild(document.createElement('tr').appendChild(document.createTextNode(i)));
     var select = document.createElement('select');
-    for(var j = 0; j <= 30; ++j) {
+    for(var j = 0; j < 20; ++j) {
       var td = document.createElement('td');
-      td.appendChild(createSelect(i, j));
+      td.appendChild(createSelect(i, j*74371));
       row.appendChild(td);
     }
   }

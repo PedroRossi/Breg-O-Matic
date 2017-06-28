@@ -19,17 +19,18 @@ Player.prototype.removeTrack = function (sample, instrument) {
 Player.prototype.play = function () {
   var audioBuffer = audioContext.createBuffer(1, this.duration * audioContext.sampleRate, audioContext.sampleRate);
   var audioBufferData = audioBuffer.getChannelData(0);
-  var instPerc = 1.0;
+  var instPerc = 0.3333;
   for(i in instruments) {
     this.instruments[i].sort(function(a, b) {
-      if(a.key == b.key) return 0;
-      if(a.key < b.key) return -1;
+      if (a.key == b.key) return 0;
+      if (a.key < b.key) return -1;
       return 1;
     });
     var t = this.instruments[i];
     for(j in t) {
       var data = t[j].track.getChannelData(0);
       var next = (t[Number(j)+1] && t[Number(j)+1].key) || audioBuffer.length;
+      console.log(t[j].key, next);
       for(var k = 0; t[j].key + k < next && k < t[j].track.length; ++k)
         audioBufferData[t[j].key + k] += instPerc*data[k];
       }
