@@ -12,14 +12,14 @@ h1 {
   margin-top: 200px;
 }
 
-#images {
+.images {
   white-space: nowrap;
   opacity: 1;
   align-content: center;
   margin-top: 50px;
 }
 
-#but {
+.btn {
 	padding: 10px 15px;
 	border-radius: 4px;
 	border: 2px solid;
@@ -29,10 +29,14 @@ h1 {
   margin-top: 75px;
 }
 
+.center {
+  text-align: center;
+}
+
 .progress {
   border: 1px solid black;
 }
 
 .progress-bar {
-  
+
 }
