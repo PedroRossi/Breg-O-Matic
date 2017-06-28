@@ -1,30 +1,38 @@
 @font-face {
-    font-family: Title;
-    src: url('fonts/PermanentMarker.ttf');
+  font-family: Title;
+  src: url('fonts/PermanentMarker.ttf');
 	/*src: url('fonts/naughty_scratch_free.ttf');*/
 }
 
 h1 {
 	font-weight: lighter;
-    font-size: 350%;
-    font-family: Title;
-    text-align: center;
-    margin-top: 200px;
+  font-size: 350%;
+  font-family: Title;
+  text-align: center;
+  margin-top: 200px;
 }
 
 #images {
-    white-space: nowrap;
-    opacity: 1;
-    align-content: center;
-    margin-top: 50px;
+  white-space: nowrap;
+  opacity: 1;
+  align-content: center;
+  margin-top: 50px;
 }
 
 #but {
 	padding: 10px 15px;
 	border-radius: 4px;
 	border: 2px solid;
-    font-size: 100%;
-    font-family: Title;
-    text-align: center;
-    margin-top: 75px;
+  font-size: 100%;
+  font-family: Title;
+  text-align: center;
+  margin-top: 75px;
+}
+
+.progress {
+  border: 1px solid black;
+}
+
+.progress-bar {
+  
 }

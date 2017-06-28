@@ -29,10 +29,14 @@ function createSelect(tracksLength, instrument, time) {
       if (audio)
         tempo = audio.tempo;
       var i;
-      for (i=0;i<tempo/*trocar por tempo da track*/;++i)
+      for (i=0;i<tempo;++i)
         tableMap[this.instrument][this.time+1+i].childNodes[0].className = "red"
-      for (;i<4;++i)
-        tableMap[this.instrument][this.time+1+i].childNodes[0].className = "white"
+      for (;i<4;++i) {
+        if (tableMap[this.instrument][this.time+1+i].childNodes[0].selectedIndex<=0)
+          tableMap[this.instrument][this.time+1+i].childNodes[0].className = "white";
+        else
+          break;
+      }
     }
   }
   for (var j = -1; j < tracksLength; ++j) {
@@ -51,19 +55,31 @@ function createSelect(tracksLength, instrument, time) {
 function createTable() {
   var table = document.createElement('table');
   document.getElementById('main').appendChild(table);
-  console.log(this.instruments);
+  var margin = 0;
   for(var i in this.instruments) {
     var row = document.createElement('tr');
     table.appendChild(row);
-    row.appendChild(document.createElement('tr').appendChild(document.createTextNode(i)));
-    var select = document.createElement('select');
+    var title = document.createElement('td');
+    title.appendChild(document.createTextNode(i));
+    row.appendChild(title);
     for(var j = 0; j <= loopCount; ++j) {
       var td = document.createElement('td');
       td.appendChild(createSelect(this.instruments[i].length, i, j));
       row.appendChild(td);
     }
+    if (row.childNodes[1].offsetLeft>margin)
+      margin = row.childNodes[1].offsetLeft;
     tableMap[i]=row.childNodes;
   }
+  var progress = document.createElement('div');
+  progress.className = "progress";
+  console.log(margin);
+  progress.style['margin-left'] = margin+'px';
+  progress.style.width = (table.offsetWidth-(margin+5))+'px';
+  progress.innerHTML = "aaaa";
+  var progressBar = document.createElement('div');
+  progressBar.className = "progress-bar";
+  document.getElementById('main').appendChild(progress);
 }
 
 function createButtons() {
