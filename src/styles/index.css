@@ -1,9 +1,9 @@
 @font-face {
   font-family: Title;
-  /* src: url('fonts/PermanentMarker.ttf'); */
+  src: url('fonts/PermanentMarker.ttf');
   /*src: url('fonts/ptarm.ttf');*/
   /*src: url('fonts/Precious.ttf');*/
-  src: url('fonts/Arista.ttf');
+  /*src: url('fonts/Arista.ttf');*/
 	/*src: url('fonts/naughty_scratch_free.ttf');*/
 }
 
