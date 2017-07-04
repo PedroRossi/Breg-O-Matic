@@ -1,7 +1,20 @@
 @font-face {
   font-family: Title;
   src: url('fonts/PermanentMarker.ttf');
+  /*src: url('fonts/ptarm.ttf');*/
+  /*src: url('fonts/Precious.ttf');*/
+  /*src: url('fonts/Arista.ttf');*/
 	/*src: url('fonts/naughty_scratch_free.ttf');*/
+}
+
+body{
+  /*background: repeating-linear-gradient(
+  90deg,
+  #ffff80,
+  #ffff80 10px,
+  #d9d9d9 10px,
+  #d9d9d9 20px
+  );*/
 }
 
 h1 {
@@ -9,7 +22,9 @@ h1 {
   font-size: 350%;
   font-family: Title;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 150px;
+  color: yellow;
+  text-shadow: -2px 0 black, 0 5px black, 5px 0 black, 0 -2px black;
 }
 
 .images {
@@ -20,12 +35,19 @@ h1 {
 }
 
 .btn {
+  cursor: pointer;
+  background-color: white;
 	padding: 10px 15px;
-	border-radius: 4px;
-	border: 2px solid;
+	border-radius: 25px;
+	border: 4px;
+  border-color: yellow;
   font-size: 100%;
+  font-size: 20px;
   font-family: Title;
   text-align: center;
+  border-style: ridge;
+  color: yellow;
+  text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
   margin-top: 75px;
 }
 

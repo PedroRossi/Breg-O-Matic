@@ -51,12 +51,12 @@ class Welcome extends Component {
   render() {
     return (
       <div className="center">
-        <h1>Bem vindo ao Breg-O-Matic, carai!</h1>
+        <h1>Bem-vindo ao Breg-O-Matic, carai!</h1>
         <div className="images" id="images">
           {this.state.loading}
         </div>
         <div>
-          <button className="btn" disabled={!this.state.button} onClick={this.go}>Vai carai!</button>
+          <button className="btn" disabled={!this.state.button} onClick={this.go}>VAI CARAI!</button>
         </div>
       </div>
     );
