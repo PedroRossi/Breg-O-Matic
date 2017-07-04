@@ -6,9 +6,9 @@ import bassSamples from '../../samples/instruments/bass.json';
 import drumsSamples from '../../samples/instruments/drums.json';
 import keyboardSamples from '../../samples/instruments/keyboard.json';
 
-// import bassIcon from '../../images/bass.png';
-// import drumsIcon from '../../images/drums.png';
-// import keyboardIcon from '../../images/keyboard.png';
+import bassIcon from '../../images/bass.png';
+import drumsIcon from '../../images/drums.png';
+import keyboardIcon from '../../images/keyboard.png';
 
 import '../../styles/main.css';
 
@@ -16,30 +16,31 @@ class Main extends Component {
 
   constructor(props) {
     super(props);
-    this.numberOfBlocks = 4*5;
+    this.numberOfBlocks = 4;
     this.instruments = {
       bass: {
-        samples: [],
+        samples: bassSamples,
         blocks: Array(this.numberOfBlocks).fill(-1)
       },
       drums: {
-        samples: [],
+        samples: drumsSamples,
         blocks: Array(this.numberOfBlocks).fill(-1)
       },
       keyboard: {
-        samples: [],
+        samples: keyboardSamples,
         blocks: Array(this.numberOfBlocks).fill(-1)
       }
     };
-    let relativePath = '';
-    if (window.location.pathname.indexOf('Breg-O-Matic') !== -1)
-      relativePath = '/Breg-O-Matic';
-    bassSamples.forEach((sample) => this.instruments.bass.samples.push(new Audio(relativePath+'/instruments/bass/'+sample.file)));
-    drumsSamples.forEach((sample) => this.instruments.drums.samples.push(new Audio(relativePath+'/instruments/drums/'+sample.file)));
-    keyboardSamples.forEach((sample) => this.instruments.keyboard.samples.push(new Audio(relativePath+'/instruments/keyboard/'+sample.keyboard)));
-    for (let instrument in this.instruments)
-      for (let i in this.instruments[instrument].blocks)
-        this.instruments[instrument].blocks[i] = <Block max={this.instruments[instrument].samples.length}/>
+    // let relativePath = '';
+    // if (window.location.pathname.indexOf('Breg-O-Matic') !== -1)
+    //   relativePath = '/Breg-O-Matic';
+    // load instruments on buffer loader here
+    for (let instrument in this.instruments) {
+      for (let i in this.instruments[instrument].blocks) {
+        let aux = <Block key={instrument+i} index={i} instrument={this.instruments[instrument]}/>;
+        this.instruments[instrument].blocks[i] = aux;
+      }
+    }
     let instrumentsRows = this.renderInstruments();
     this.state = {
       instruments: instrumentsRows
@@ -48,11 +49,24 @@ class Main extends Component {
 
   renderInstruments() {
     let ret = [];
+    ret.push(
+      <div key={-1} className="row">
+        <div className="col-md-4 block-img">
+          <img src={bassIcon} alt={""} width={50} height={50}/>
+        </div>
+        <div className="col-md-4 block-img">
+          <img src={drumsIcon} alt={""} width={50} height={50}/>
+        </div>
+        <div className="col-md-4 block-img">
+          <img src={keyboardIcon} alt={""} width={50} height={50}/>
+        </div>
+      </div>
+    );
     for (let c=0;c<this.numberOfBlocks;++c) {
-      let aux = []
+      let aux = [];
       for (let i in this.instruments)
-        aux.push(this.instruments[i].blocks[c])
-      ret.push(aux)
+        aux.push(this.instruments[i].blocks[c]);
+      ret.push(<div key={c} className="row">{aux}</div>);
     }
     return ret;
   }
@@ -72,7 +86,8 @@ class Main extends Component {
           <div className="col-md-3">
             {this.state.instruments}
           </div>
-
+          <div className="col-md-1"></div>
+          <div className="col-md-8"></div>
         </div>
       </div>
     );

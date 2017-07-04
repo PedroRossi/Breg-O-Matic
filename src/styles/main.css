@@ -1,10 +1,31 @@
-.block {
+div.block {
   width: 50px;
   height: 50px;
   margin: 5px;
 }
 
-.block-round {
-  border: 1px solid black;
+div.block-img {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  padding: 0px;
+}
+
+div.block p {
+  width: 50px;
+  height: 50px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  font-weight: bold;
+}
+
+div.block-round {
+  border: 1px solid yellow;
   border-radius: 10px;
+}
+
+div.bg {
+  background-color: yellow;
 }
