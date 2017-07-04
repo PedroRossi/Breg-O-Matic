@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Welcome from './containers/Welcome';
 import registerServiceWorker from './utils/registerServiceWorker';
-import './styles/index.css';
 
 /*
   Welcome
@@ -21,5 +20,5 @@ import './styles/index.css';
         seta indicadora
 */
 
-ReactDOM.render(<Welcome timeout={100}/>, document.getElementById('root'));
+ReactDOM.render(<Welcome timeout={1}/>, document.getElementById('root'));
 registerServiceWorker();

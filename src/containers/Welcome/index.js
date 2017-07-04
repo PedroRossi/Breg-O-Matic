@@ -4,7 +4,7 @@ import Main from '../Main';
 import galeroso from '../../images/galeroso.png';
 import galeroso2 from '../../images/galeroso2.png';
 import troinha from '../../samples/troinha.mp3';
-import '../../styles/index.css';
+import '../../styles/welcome.css';
 
 class Welcome extends Component {
 
