@@ -1,13 +1,13 @@
 import { BufferLoader } from './bufferLoader.js';
 
-var relativePath = '';
+let relativePath = '';
 
 if (window.location.pathname.indexOf('Breg-O-Matic') !== -1)
   relativePath = '/Breg-O-Matic';
 
-var loaded;
+let loaded;
 function genCallback(instruments, instrument, callBack) {
-  return function(bufferArray) {
+  return (bufferArray) => {
     loaded += 1;
     instruments[instrument].bufferArray = bufferArray;
     if(loaded === Object.keys(instruments).length)
@@ -18,9 +18,9 @@ function genCallback(instruments, instrument, callBack) {
 export default class Loader {
   static load(instruments, context, callBack) {
     loaded = 0;
-    for(var i in instruments) {
+    for(let i in instruments) {
       // eslint-disable-next-line
-      var bufferLoader = new BufferLoader(context, instruments[i].files.map((val, idx) => {
+      let bufferLoader = new BufferLoader(context, instruments[i].files.map((val, idx) => {
         return relativePath + '/instruments/' + i + '/' + val;
       }), genCallback(instruments, i, callBack));
       bufferLoader.load();

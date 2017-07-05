@@ -1,4 +1,5 @@
 export class BufferLoader {
+
   constructor(context, urlList, callback) {
     this.context = context;
     this.urlList = urlList;
@@ -8,14 +9,14 @@ export class BufferLoader {
   }
 
   loadBuffer(url, index) {
-    var request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.responseType = "arraybuffer";
-    var loader = this;
-    request.onload = function() {
+    let loader = this;
+    request.onload = () => {
       loader.context.decodeAudioData(
         request.response,
-        function(buffer) {
+        (buffer) => {
           if (!buffer) {
             alert('error decoding file data: ' + url);
             return;
@@ -24,19 +25,19 @@ export class BufferLoader {
           if (++loader.loadCount === loader.urlList.length)
             loader.onLoad(loader.bufferList);
         },
-        function(error) {
+        (error) => {
           console.error('decodeAudioData error', error);
         }
       );
     }
-    request.onerror = function() {
+    request.onerror = () => {
       alert('BufferLoader: XHR error');
     }
     request.send();
   }
 
   load() {
-    for(var i in this.urlList)
+    for(let i in this.urlList)
       this.loadBuffer(this.urlList[i], i);
   }
 

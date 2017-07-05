@@ -1,0 +1,16 @@
+tr {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+}
+
+td.player {
+  border-bottom: 0px;
+}
+
+td.player img {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  padding-top: 10px;
+}

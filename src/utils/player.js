@@ -1,6 +1,8 @@
 export default class Player {
 
   constructor(context, duration, instruments) {
+    this.isPlaying = false;
+    this.isPaused = false;
     this.duration = duration;
     this.audioContext = context;
     this.instrumentsTracks = {};
@@ -22,7 +24,7 @@ export default class Player {
     let audioBufferData = audioBuffer.getChannelData(0);
     let instPerc = 1.0;
     for (var i in this.instrumentsTracks) {
-      this.instrumentsTracks[i].sort(function(a, b) {
+      this.instrumentsTracks[i].sort((a, b) => {
         if (a.key === b.key) return 0;
         if (a.key < b.key) return -1;
         return 1;
@@ -37,7 +39,14 @@ export default class Player {
     }
     if(this.source) {
       try {
-        this.source.stop();
+        if (this.isPaused) {
+          this.audioContext.resume();
+          this.isPlaying = true;
+          this.isPaused = false;
+          return;
+        } else {
+          this.source.stop();
+        }
       } catch (e) {
         console.error(e);
       }
@@ -46,10 +55,29 @@ export default class Player {
     this.source.buffer = audioBuffer;
     this.source.connect(this.audioContext.destination);
     this.source.start();
+    this.isPlaying = true;
+    this.source.onendend = () => {
+      this.isPlaying = false;
+      this.isPaused = false;
+    }
+  }
+
+  pause() {
+    this.audioContext.suspend();
+    this.isPlaying = false;
+    this.isPaused = true;
   }
 
   stop() {
-    if(this.source) this.source.stop();
+    if(this.source) {
+      this.source.stop();
+      this.isPaused = false;
+      this.isPlaying = false;
+    }
+  }
+
+  download() {
+    // TODO return raw data
   }
 
 }

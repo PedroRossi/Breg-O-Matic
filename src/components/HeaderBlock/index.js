@@ -5,7 +5,7 @@ import "../../styles/headerBlock.css"
 export default class HeaderBlock extends Component {
   render() {
     return (
-      <td>
+      <td className="headerInstrument">
         <img src={this.props.src} alt="" />
       </td>
     )

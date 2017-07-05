@@ -7,7 +7,7 @@ import Loader from './utils/loader';
 
 import { data } from './data';
 
-var audioContext = new (window.webkitAudioContext || window.AudioContext)();
+const audioContext = new (window.webkitAudioContext || window.AudioContext)();
 
 export class Index extends Component {
   constructor(props) {
