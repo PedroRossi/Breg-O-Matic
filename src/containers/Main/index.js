@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 
-import Block from '../../components/Block'
+import Row from  '../../components/Row';
 
-import bassSamples from '../../samples/instruments/bass.json';
-import drumsSamples from '../../samples/instruments/drums.json';
-import keyboardSamples from '../../samples/instruments/keyboard.json';
-
-import bassIcon from '../../images/bass.png';
-import drumsIcon from '../../images/drums.png';
-import keyboardIcon from '../../images/keyboard.png';
+import Player from '../../utils/player';
 
 import '../../styles/main.css';
 
@@ -16,81 +10,30 @@ class Main extends Component {
 
   constructor(props) {
     super(props);
-    this.numberOfBlocks = 4;
-    this.instruments = {
-      bass: {
-        samples: bassSamples,
-        blocks: Array(this.numberOfBlocks).fill(-1)
-      },
-      drums: {
-        samples: drumsSamples,
-        blocks: Array(this.numberOfBlocks).fill(-1)
-      },
-      keyboard: {
-        samples: keyboardSamples,
-        blocks: Array(this.numberOfBlocks).fill(-1)
-      }
-    };
-    // let relativePath = '';
-    // if (window.location.pathname.indexOf('Breg-O-Matic') !== -1)
-    //   relativePath = '/Breg-O-Matic';
-    // load instruments on buffer loader here
-    for (let instrument in this.instruments) {
-      for (let i in this.instruments[instrument].blocks) {
-        let aux = <Block key={instrument+i} index={i} instrument={this.instruments[instrument]}/>;
-        this.instruments[instrument].blocks[i] = aux;
-      }
-    }
-    let instrumentsRows = this.renderInstruments();
-    this.state = {
-      instruments: instrumentsRows
-    };
+    this.player = new Player(props.context, props.rows*props.blockDuration, props.instruments);
+    console.log(props.instruments['drums'])
+    this.rows = Object.keys(props.instruments).map((val, idx) => {
+      return <Row instrument={props.instruments[val]} columns={props.rows} player={this.player} key={val} blockDuration={props.blockDuration} />;
+    });
   }
 
-  renderInstruments() {
-    let ret = [];
-    ret.push(
-      <div key={-1} className="row">
-        <div className="col-md-4 block-img">
-          <img src={bassIcon} alt={""} width={50} height={50}/>
-        </div>
-        <div className="col-md-4 block-img">
-          <img src={drumsIcon} alt={""} width={50} height={50}/>
-        </div>
-        <div className="col-md-4 block-img">
-          <img src={keyboardIcon} alt={""} width={50} height={50}/>
-        </div>
-      </div>
-    );
-    for (let c=0;c<this.numberOfBlocks;++c) {
-      let aux = [];
-      for (let i in this.instruments)
-        aux.push(this.instruments[i].blocks[c]);
-      ret.push(<div key={c} className="row">{aux}</div>);
-    }
-    return ret;
-  }
-
-  renderPlayer() {
-
-  }
-
-  renderImage() {
-
+  _onPlay() {
+    this.player.play();
   }
 
   render() {
-    return(
+    return (
       <div>
-        <div className="row">
-          <div className="col-md-3">
-            {this.state.instruments}
-          </div>
-          <div className="col-md-1"></div>
-          <div className="col-md-8"></div>
-        </div>
+        <button onClick={this._onPlay.bind(this)}>
+          PLAY
+        </button>
+        <table>
+          <tbody>
+            {this.rows}
+          </tbody>
+        </table>
       </div>
-    );
+    )
   }
 
 }

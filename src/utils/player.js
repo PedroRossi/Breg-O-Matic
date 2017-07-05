@@ -1,31 +1,33 @@
-class Player {
+export default class Player {
 
-  constructor(duration, instruments) {
+  constructor(context, duration, instruments) {
     this.duration = duration;
-    this.instruments = instruments;
-    this.audioContext = new (window.webkitAudioContext || window.AudioContext)();
+    this.audioContext = context;
+    this.instrumentsTracks = {};
+    for(var i in instruments)
+      this.instrumentsTracks[i] = [];
   }
 
   addTrack(sample, instrument, trackBuffer) {
     this.removeTrack(sample, instrument)
-    this.instruments[instrument].push({key: sample, track: trackBuffer});
+    this.instrumentsTracks[instrument].push({key: sample, track: trackBuffer});
   }
 
   removeTrack(sample, instrument) {
-    this.instruments[instrument] = this.instruments[instrument].filter(val => val.key != sample)
+    this.instrumentsTracks[instrument] = this.instrumentsTracks[instrument].filter(val => val.key !== sample)
   }
 
   play() {
-    let audioBuffer = this.audioContext.createBuffer(1, this.duration * this.audioContext.sampleRate, this.audioContext.sampleRate);
+    let audioBuffer = this.audioContext.createBuffer(1, this.duration, this.audioContext.sampleRate);
     let audioBufferData = audioBuffer.getChannelData(0);
     let instPerc = 1.0;
-    for (let i in this.instruments) {
-      this.instruments[i].sort(function(a, b) {
+    for (var i in this.instrumentsTracks) {
+      this.instrumentsTracks[i].sort(function(a, b) {
         if (a.key === b.key) return 0;
         if (a.key < b.key) return -1;
         return 1;
       });
-      let t = this.instruments[i];
+      let t = this.instrumentsTracks[i];
       for (let j in t) {
         let data = t[j].track.getChannelData(0);
         let next = (t[Number(j)+1] && t[Number(j)+1].key) || audioBuffer.length;
@@ -51,5 +53,3 @@ class Player {
   }
 
 }
-
-export default Player;

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Main from '../Main';
 import galeroso from '../../images/galeroso.png';
 import galeroso2 from '../../images/galeroso2.png';
 import troinha from '../../samples/troinha.mp3';
@@ -44,10 +42,6 @@ class Welcome extends Component {
     (new Audio(troinha)).play();
   }
 
-  go(e) {
-    ReactDOM.render(<Main/>, document.getElementById('root'));
-  }
-
   render() {
     return (
       <div className="center">
@@ -56,7 +50,7 @@ class Welcome extends Component {
           {this.state.loading}
         </div>
         <div>
-          <button className="btn" disabled={!this.state.button} onClick={this.go}>VAI CARAI!</button>
+          <button className="btn" disabled={!this.state.button} onClick={this.props.onDone}>VAI CARAI!</button>
         </div>
       </div>
     );

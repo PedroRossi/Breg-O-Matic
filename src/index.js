@@ -1,24 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Welcome from './containers/Welcome';
+import Main from './containers/Main';
 import registerServiceWorker from './utils/registerServiceWorker';
+import Loader from './utils/loader';
 
-/*
-  Welcome
-    tela de welcome original
-  Main
-    header
-      dos instrumentos
-        icones
-      do player
-        play/pause
-        stop
-    lista
-      dos instrumentos
-        bloco representando cada tempo
-      da barra de progresso
-        seta indicadora
-*/
+import { data } from './data';
 
-ReactDOM.render(<Welcome timeout={1}/>, document.getElementById('root'));
+var audioContext = new (window.webkitAudioContext || window.AudioContext)();
+
+export class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toRender: <Welcome timeout={1} onDone={this._onDone.bind(this)} />
+    }
+  }
+
+  componentDidMount() {
+    Loader.load(data.instruments, audioContext, (instruments) => {
+      this.instruments = instruments;
+    });
+  }
+
+  _onDone() {
+    this.setState({
+      toRender: <Main instruments={this.instruments} rows={data.rows} context={audioContext} blockDuration={data.samplesPBlock}/>
+    })
+  }
+
+  render() {
+    return this.state.toRender;
+  }
+}
+
+ReactDOM.render(<Index />, document.getElementById('root'));
 registerServiceWorker();
