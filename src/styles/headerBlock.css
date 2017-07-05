@@ -1,0 +1,9 @@
+img {
+  width: 100px;
+  height: 100px;
+}
+
+td.headerInstrument {
+  border-top: 2px solid;
+  display: block;
+}
