@@ -9,8 +9,8 @@ td.player {
 }
 
 td.player img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   cursor: pointer;
   padding-top: 10px;
 }

@@ -1,11 +1,11 @@
 {
   "short_name": "Breg-O-Matic",
-  "name": "Create React App Sample",
+  "name": "Breg-O-Matic",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "galeroso.ico",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/ico"
     }
   ],
   "start_url": "./index.html",
