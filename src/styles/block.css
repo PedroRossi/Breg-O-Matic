@@ -1,14 +1,9 @@
-td {
-  display: block;
-  border-bottom: 1px solid;
-}
-
 span {
   text-align: center;
-  line-height: 100px;
   cursor: pointer;
-  width: 100px;
-  height: 100px;
   display: block;
   font-size: 30px;
+  line-height: 100px;
+  width: 100px;
+  height: 100px;
 }

@@ -1,16 +1,21 @@
-tr {
-  text-align: center;
+thead {
   width: 100px;
-  height: 100px;
-}
-
-td.player {
-  border-bottom: 0px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
 }
 
 td.player img {
   width: 90px;
   height: 90px;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+
+td.player {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
   padding-top: 10px;
 }

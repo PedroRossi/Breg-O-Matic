@@ -1,20 +1,6 @@
 @font-face {
   font-family: Title;
   src: url('fonts/PermanentMarker.ttf');
-  /*src: url('fonts/ptarm.ttf');*/
-  /*src: url('fonts/Precious.ttf');*/
-  /*src: url('fonts/Arista.ttf');*/
-	/*src: url('fonts/naughty_scratch_free.ttf');*/
-}
-
-body{
-  /*background: repeating-linear-gradient(
-  90deg,
-  #ffff80,
-  #ffff80 10px,
-  #d9d9d9 10px,
-  #d9d9d9 20px
-  );*/
 }
 
 h1 {
@@ -28,7 +14,6 @@ h1 {
 }
 
 .images {
-  white-space: nowrap;
   opacity: 1;
   align-content: center;
   margin-top: 50px;

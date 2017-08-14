@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import playIcon from '../../images/play.png';
 import pauseIcon from '../../images/pause.png';
 import stopIcon from '../../images/stop.svg';
-// import downloadIcon from '../../images/download1.svg';
+import downloadIcon from '../../images/download1.svg';
 
 import '../../styles/playerHeader.css';
 
@@ -56,12 +56,12 @@ class PlayerHeader extends Component {
           </td>
         </tr>
         <tr>
+          <td className="player">
+            <img src={downloadIcon} alt={""} onClick={this.download.bind(this)}/>
+          </td>
         </tr>
       </thead>
     );
-    // <td className="player">
-    // <img src={downloadIcon} alt={""} onClick={this.download.bind(this)}/>
-    // </td>
   }
 
 }
