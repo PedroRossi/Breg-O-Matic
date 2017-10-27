@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import '../../styles/block.css';
 
 export default class Block extends Component {

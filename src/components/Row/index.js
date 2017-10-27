@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
 import HeaderBlock from '../HeaderBlock';
 import Block from '../Block';
-
 import '../../styles/row.css';
 
 export default class Row extends Component {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import "../../styles/headerBlock.css"
+import '../../styles/headerBlock.css';
 
 export default class HeaderBlock extends Component {
   render() {

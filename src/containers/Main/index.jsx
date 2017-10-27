@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-
 import PlayerHeader from '../../components/PlayerHeader';
-
 import Row from  '../../components/Row';
-
 import Player from '../../utils/player';
-
+import ProgressBar from '../../components/ProgressBar';
 import '../../styles/main.css';
 
 class Main extends Component {
@@ -24,6 +21,7 @@ class Main extends Component {
         <table>
           <PlayerHeader player={this.player}/>
           <tbody>
+            <ProgressBar />
             {this.rows}
           </tbody>
         </table>

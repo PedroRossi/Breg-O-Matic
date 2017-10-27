@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
 import playIcon from '../../images/play.png';
 import pauseIcon from '../../images/pause.png';
 import stopIcon from '../../images/stop.svg';
 import downloadIcon from '../../images/download1.svg';
-
 import '../../styles/playerHeader.css';
 
 class PlayerHeader extends Component {
