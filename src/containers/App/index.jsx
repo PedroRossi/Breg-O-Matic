@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Welcome from '../Welcome';
 import Main from '../Main';
 import Loader from '../../utils/loader';
-
 import { data } from '../../data';
 
 const audioContext = new (window.webkitAudioContext || window.AudioContext)();
@@ -23,7 +22,7 @@ export class App extends Component {
 
     _onDone() {
         this.setState({
-            toRender: <Main instruments={this.instruments} rows={data.rows} context={audioContext} blockDuration={data.samplesPBlock} />
+            toRender: <Main instruments={this.instruments} cols={data.cols} context={audioContext} blockDuration={data.samplesPBlock} />
         })
     }
 

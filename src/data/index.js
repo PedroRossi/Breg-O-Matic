@@ -1,7 +1,11 @@
-import { instruments } from './instruments'
+import { bass, drums, keyboard } from './instruments';
 
-export var data = {
-  "instruments": instruments,
-  "rows": 20,
+export const data = {
+  "instruments": {
+    "bass": bass,
+    "drums": drums,
+    "keyboard": keyboard
+  },
+  "cols": 20,
   "samplesPBlock": 68328
-}
+};

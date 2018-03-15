@@ -1,27 +1,53 @@
 import React, { Component } from 'react';
+import { data } from '../../data/';
 import '../../styles/progressBar.css';
 
 class ProgressBar extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
-        };
+    state = {
+        count: 0,
+        isPlaying: false
     }
-
+    
     componentDidMount() {
-        //this.countID = setInterval(() => this.tick(), 1);
+        this.width = document.getElementById('tbody').offsetWidth;
+        const totalDuration = data.cols * data.samplesPBlock;
+        this.pixel = this.width / (totalDuration / 441);
     }
 
-    componentWillUnmount() {
+    toogleIsPlaying() {
+        if (!this.state.isPlaying)
+            this.countID = setInterval(() => this.tick(), 1);
+        else
+            clearInterval(this.countID);
+        this.setState({isPlaying: !this.state.isPlaying});
+    }
+
+    stop() {
         clearInterval(this.countID);
+        this.setState({
+            count: 0,
+            isPlaying: false
+        });
     }
 
     tick() {
-        this.setState(prevState => ({
-            count: prevState.count + 10
-        }));
+        this.setState(prevState => {
+            let state = {};
+            const count = prevState.count + this.pixel;
+            if (count >= this.width) {
+                state = {
+                    count: 0,
+                    isPlaying: false
+                };
+                clearInterval(this.countID);
+            } else {
+                state = {
+                    count
+                };
+            }
+            return state;
+        });
     }
 
     render() {

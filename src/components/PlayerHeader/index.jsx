@@ -24,6 +24,7 @@ class PlayerHeader extends Component {
       this.player.play();
       btn = <img src={pauseIcon} alt={""} onClick={this.play.bind(this)}/>
     }
+    this.props.toogleIsPlaying();
     this.setState({
       btn: btn
     });
@@ -31,6 +32,7 @@ class PlayerHeader extends Component {
 
   stop() {
     this.player.stop();
+    this.props.stop();
     this.setState({
       btn: <img src={playIcon} alt={""} onClick={this.play.bind(this)}/>
     });

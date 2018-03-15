@@ -1,9 +1,3 @@
-import { bass } from "./bass.js";
-import { drums } from "./drums.js";
-import { keyboard } from "./keyboard.js";
-
-export var instruments = {
-  "bass": bass,
-  "drums": drums,
-  "keyboard": keyboard
-};
+export { bass } from "./bass.js";
+export { drums } from "./drums.js";
+export { keyboard } from "./keyboard.js";

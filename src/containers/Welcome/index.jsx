@@ -9,7 +9,7 @@ class Welcome extends Component {
   constructor(props) {
     super(props);
     let loading = [];
-    for (var i=0;i<10;++i)
+    for (let i=0;i<10;++i)
       loading.push(<img src={galeroso2} alt={""} height={50} width={50} key={i}/>);
     this.state = {loading: loading, button: false};
   }
