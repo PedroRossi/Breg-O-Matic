@@ -3,15 +3,16 @@ import playIcon from '../../images/play.png';
 import pauseIcon from '../../images/pause.png';
 import stopIcon from '../../images/stop.svg';
 import downloadIcon from '../../images/download1.svg';
-import '../../styles/playerHeader.css';
 
 class PlayerHeader extends Component {
 
   constructor(props) {
     super(props);
     this.player = props.player;
+    this.playBtn = (<img style={styles.img} src={playIcon} alt={""} onClick={this.play.bind(this)}/>);
+    this.pauseBtn = (<img style={styles.img} src={pauseIcon} alt={""} onClick={this.play.bind(this)}/>);
     this.state = {
-      btn: <img src={playIcon} alt={""} onClick={this.play.bind(this)}/>
+      btn: this.playBtn
     }
   }
 
@@ -19,10 +20,10 @@ class PlayerHeader extends Component {
     let btn;
     if (this.player.isPlaying) {
       this.player.pause();
-      btn = <img src={playIcon} alt={""} onClick={this.play.bind(this)}/>
+      btn = this.playBtn;
     } else {
       this.player.play();
-      btn = <img src={pauseIcon} alt={""} onClick={this.play.bind(this)}/>
+      btn = this.pauseBtn;
     }
     this.props.toogleIsPlaying();
     this.setState({
@@ -34,7 +35,7 @@ class PlayerHeader extends Component {
     this.player.stop();
     this.props.stop();
     this.setState({
-      btn: <img src={playIcon} alt={""} onClick={this.play.bind(this)}/>
+      btn: this.playBtn
     });
   }
 
@@ -44,26 +45,43 @@ class PlayerHeader extends Component {
 
   render() {
     return (
-      <thead>
-        <tr>
-          <td className="player">
-            {this.state.btn}
-          </td>
-        </tr>
-        <tr>
-          <td className="player">
-            <img src={stopIcon} alt={""} onClick={this.stop.bind(this)}/>
-          </td>
-        </tr>
-        <tr>
-          <td className="player">
-            <img src={downloadIcon} alt={""} onClick={this.download.bind(this)}/>
-          </td>
-        </tr>
-      </thead>
+      <div style={styles.wrapper}>
+        <div style={styles.box}>
+          {this.state.btn}
+        </div>
+        <div style={styles.box}>
+          <img style={styles.img} src={stopIcon} alt={""} onClick={this.stop.bind(this)}/>
+        </div>
+        <div style={styles.box}>
+          <img style={styles.img} src={downloadIcon} alt={""} onClick={this.download.bind(this)}/>
+        </div>
+      </div>
     );
   }
 
 }
+
+const styles = {
+  wrapper: {
+    width: 100,
+    position: 'absolute',
+    top: 0,
+    left: 0
+  },
+  box: {
+    verticalAlign: 'middle',
+    width: 100,
+    height: 100,
+    cursor: 'pointer',
+    paddingTop: 10,
+    border: '2px solid black'
+  },
+  img: {
+    width: 90,
+    height: 90,
+    cursor: 'pointer',
+    paddingBottom: 10
+  }
+};
 
 export default PlayerHeader;

@@ -33,11 +33,11 @@ export default class Player {
       for (let j in t) {
         let data = t[j].track.getChannelData(0);
         let next = (t[Number(j)+1] && t[Number(j)+1].key) || audioBuffer.length;
-        for(let k = 0; t[j].key + k < next && k < t[j].track.length; ++k)
+        for (let k = 0; t[j].key + k < next && k < t[j].track.length; ++k)
           audioBufferData[t[j].key + k] += instPerc*data[k];
       }
     }
-    if(this.source) {
+    if (this.source) {
       try {
         if (this.isPaused) {
           this.audioContext.resume();

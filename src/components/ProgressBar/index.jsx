@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { data } from '../../data/';
-import '../../styles/progressBar.css';
 
 class ProgressBar extends Component {
 
@@ -10,9 +9,11 @@ class ProgressBar extends Component {
     }
     
     componentDidMount() {
-        this.width = document.getElementById('tbody').offsetWidth;
-        const totalDuration = data.cols * data.samplesPBlock;
-        this.pixel = this.width / (totalDuration / 441);
+        // TODO review
+        // this.width = data.cols * 100
+        this.width = document.getElementById('row').offsetWidth
+        const totalDuration = data.cols * data.samplesPBlock
+        this.pixel = this.width / (totalDuration / 441)
     }
 
     toogleIsPlaying() {
@@ -52,10 +53,18 @@ class ProgressBar extends Component {
 
     render() {
         return (
-            <div className="progressBar" style={{left: 200 + this.state.count}}/>
+            <div style={Object.assign({}, style, {left: this.state.count})}/>
         );
     }
 
 }
+
+const style = {
+    width: 2,
+    height: 310,
+    backgroundColor: 'grey',
+    position: 'relative',
+    float: 'left'
+};
 
 export default ProgressBar;

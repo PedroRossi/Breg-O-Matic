@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+
 import PlayerHeader from '../../components/PlayerHeader';
-import Row from  '../../components/Row';
-import Player from '../../utils/player';
+import InstrumentsHeader from '../../components/InstrumentsHeader';
 import ProgressBar from '../../components/ProgressBar';
-import '../../styles/main.css';
+import Row from  '../../components/Row';
+
+import Player from '../../utils/player';
 
 class Main extends Component {
 
@@ -21,18 +23,44 @@ class Main extends Component {
 
   render() {
     return (
-      <div>
-        <table>
-          <PlayerHeader player={this.player} toogleIsPlaying={this.toogleIsPlaying} stop={this.stop}/>
-          <tbody id="tbody">
-            <ProgressBar ref={instance => { this.progressbar = instance; }} />
+      <div style={styles.wrapper}>
+        <PlayerHeader player={this.player} toogleIsPlaying={this.toogleIsPlaying} stop={this.stop}/>
+        <InstrumentsHeader />
+        <div style={styles.rowsWrapper}>
+          <ProgressBar ref={instance => { this.progressbar = instance; }} />
+          <div style={styles.grid}>
             {this.rows}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
     )
   }
 
 }
+
+const width = window.innerWidth
+
+const styles = {
+  wrapper: {
+    margin: '0 auto',
+    display: 'grid',
+    gridTemplateColumns: '100px 100px auto',
+    width: '100%'
+  },
+  rowsWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 200,
+    overflowY: 'hidden',
+    overflowX: 'scroll',
+    width: width-200,
+    height: 300
+  },
+  grid: {
+    position: 'relative',
+    display: 'grid',
+    gridTemplateRows: 'repeat(3, 100px)',
+  }
+};
 
 export default Main;
